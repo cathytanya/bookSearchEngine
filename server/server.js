@@ -8,7 +8,8 @@ const {ApolloServer} = require('apollo-server-express');
 const {typeDef,resolvers}= require('./schema')
 // import database(db)
 const db= require('./config/connection')
-
+// import authMiddleware from auth.js file 
+const{ authMiddleware } = require('./utils/auth');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
