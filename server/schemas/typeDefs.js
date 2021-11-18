@@ -1,5 +1,5 @@
 // import the SQL tagged template function
-const {sql} =require('apollo-server-express');
+const {gql} =require('apollo-server-express');
 
 const typeDefs = gql`
   type Book {
