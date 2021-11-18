@@ -40,21 +40,19 @@ const resolvers = {
 
       return { token, user };
     },
-    addThought: async (parent, { thoughtText }, context) => {
+    // `saveBook`: Accepts a book author's array, description, title, bookId, image, and link as parameters;
+    //  returns a `User` type. 
+    //  (Look into creating what's known as an `input` type to handle all of these parameters!)
+    saveBook: async (parent, args, context) => {
       if (context.user) {
-        const thought = await Thought.create({
-          thoughtText,
-          thoughtAuthor: context.user.username,
-        });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { thoughts: thought._id } }
+        const updatedUser = await User.findOneAndUpdate(
+            {_id: context.user._id},
+            {$push: {saveBooks:args}},
+            {new: true,runValidators:true}
         );
-
-        return thought;
+        return updatedUser;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new Error('Cannot add book!');
     },
     addComment: async (parent, { thoughtId, commentText }, context) => {
       if (context.user) {
