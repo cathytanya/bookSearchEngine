@@ -8,6 +8,18 @@ import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 
+// Create an Apollo Provider to make every request work with the Apollo Server.
+const client= new ApolloClient({
+  request: operation =>{
+    const token = localStorage.getItem('id_token');
+    operation.setContext({
+      header:{ authorization:token?`Bearer ${token}`:''}
+    })
+  },
+  url:'/graphql'
+})
+
+
 function App() {
   return (
     <Router>
