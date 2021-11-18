@@ -3,6 +3,7 @@ const { User} = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
+// `Query` type:`me`: Which returns a `User` type.
   Query: {
     me: async (parent, args,context) => {
       if (context.user) {
@@ -15,8 +16,9 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    // `addUser`: Accepts a username, email, and password as parameters; returns an `Auth` type.
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
       const token = signToken(user);
       return { token, user };
     },
