@@ -22,6 +22,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    // `login`: Accepts an email and password as parameters; returns an `Auth` type.
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
