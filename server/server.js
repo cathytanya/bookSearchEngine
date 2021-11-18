@@ -6,8 +6,6 @@ const routes = require('./routes');
 const {ApolloServer} = require('apollo-server-express');
 // import typeDef and resolvers
 const {typeDef,resolvers}= require('./schema')
-// import database(db)
-const db= require('./config/connection')
 // import authMiddleware from auth.js file 
 const{ authMiddleware } = require('./utils/auth');
 const app = express();
