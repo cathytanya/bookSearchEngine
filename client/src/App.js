@@ -22,7 +22,7 @@ const client= new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider>
+    <ApolloProvider client={client}>
       <Router>
         <>
           <Navbar />
