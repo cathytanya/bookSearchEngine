@@ -42,12 +42,12 @@ const resolvers = {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
             {_id: context.user._id},
-            {$pull: {savedBooks:input}},
+            {$push: {savedBooks: args}},
             {new: true,runValidators:true}
         );
         return updatedUser;
       }
-      throw new AuthenticationError('NEED TO LOGIN!');
+      throw new Error('NEED TO LOGIN!');
     },
     // `removeBook`: Accepts a book's `bookId` as a parameter; returns a `User` type.
     removeBook: async (parent, {bookId}, context) => {
