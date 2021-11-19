@@ -29,13 +29,14 @@ const LoginForm = (props) => {
 
     try {
       const {data} = await login({
-        variables:{...userFormData}})
+        variables:{...userFormData}
+      })
       Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
-
+    // clear form values
     setUserFormData({
       username: '',
       email: '',
